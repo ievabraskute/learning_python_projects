@@ -1,0 +1,18 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Nov 14 11:29:45 2018
+
+@author: ibras
+"""
+from flask import session
+from functools import wraps
+
+def check_logged_in(func: object) -> object:
+    
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if 'logged_in' in session:
+            return func(*args, **kwargs)
+        return 'You are NOT logged in.'
+    
+    return wrapper
